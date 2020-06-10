@@ -1,6 +1,13 @@
 <script>
+	import { onMount } from 'svelte'
 	import { theme } from '../stores.js'
 	import Nav from '../components/Nav.svelte';
+
+	onMount(() => {
+		const ls = window.localStorage
+		const initialTheme = ls.getItem('theme') || ls.setItem('theme', 'light')
+		theme.set(initialTheme)
+	})
 
 	export let segment;
 </script>
@@ -15,6 +22,17 @@
 	}
 
 </style>
+
+<svelte:head>
+	{#if $theme === 'dark'}
+	<style>
+		body {
+			background: #242424;
+			color: #dedede;
+		}
+	</style>
+	{/if}
+</svelte:head>
 
 <Nav {segment}/>
 

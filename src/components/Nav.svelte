@@ -1,14 +1,7 @@
 <script>
-	import { onMount } from 'svelte'
 	import { theme } from '../stores.js'
 	export let segment;
-
-	onMount(() => {
-		const ls = window.localStorage
-		const initialTheme = ls.getItem('theme') || ls.setItem('theme', 'light')
-		theme.set(initialTheme)
-	})
-
+	
 	function toggleTheme () {
 		const ls = window.localStorage
 		const newTheme = $theme === 'dark' ? theme.set('light') : theme.set('dark')
@@ -85,17 +78,6 @@
 		color: #ffffff
 	}
 </style>
-
-<svelte:head>
-	{#if $theme === 'dark'}
-	<style>
-		body {
-			background: #242424;
-			color: #ffffff;
-		}
-	</style>
-	{/if}
-</svelte:head>
 
 <nav class:dark={$theme === 'dark'}>
 	<ul>

@@ -1,3 +1,5 @@
+import markdown from '@jackfranklin/rollup-plugin-markdown'
+import glob from 'rollup-plugin-glob'
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
@@ -18,6 +20,8 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			markdown(),
+			glob(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -63,6 +67,8 @@ export default {
 		input: config.server.input(),
 		output: config.server.output(),
 		plugins: [
+			markdown(),
+			glob(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
