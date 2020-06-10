@@ -25,12 +25,7 @@
 
 <svelte:head>
 	{#if $theme === 'dark'}
-	<style>
-		body {
-			background: #242424;
-			color: #dedede;
-		}
-	</style>
+	<link rel="stylesheet" href="css/global-dark.css">
 	{/if}
 </svelte:head>
 

@@ -16,7 +16,7 @@
 	}
 
 	img {
-		width: 100%;
+		width: 150px;
 		max-width: 400px;
 		margin: 0 0 1em 0;
 	}
@@ -32,9 +32,9 @@
 	<title>Home</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<h1>Greamt sumccess!</h1>
 
 <figure>
-	<img alt='Success Kid' src='successkid.jpg'>
+	<img alt='Lil Bro' src='images/lil_bro.png'>
 	<figcaption>Have fun with Sapper!</figcaption>
 </figure>

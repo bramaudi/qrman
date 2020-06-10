@@ -13,7 +13,7 @@
 	nav {
 		display: flex;
 		font-weight: 300;
-		padding: 0 1em;
+		padding: 0 1rem;
 		background: #ffffff;
 		border-bottom: 1px solid #ddd;
 	}
@@ -76,6 +76,12 @@
 	}
 	.dark button {
 		color: #ffffff
+	}
+
+	@media only screen and (min-width: 784px) {
+		nav {
+			padding: 0 calc(100vw - 60em);
+		}
 	}
 </style>
 

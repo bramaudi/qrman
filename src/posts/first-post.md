@@ -10,7 +10,10 @@ To make sure markdown is working.
 ``` js
 const fruits = ['apple', 'mango', 'pumpkin']
 
-fruits.map(fruit => fruit.toUpperCase())
+fruits.map(fruit => {
+  // Comment
+  fruit.toUpperCase()
+})
 
 console.log(fruits)
 ```
