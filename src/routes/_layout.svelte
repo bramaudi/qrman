@@ -5,8 +5,7 @@
 
 	onMount(() => {
 		const ls = window.localStorage
-		const initialTheme = ls.getItem('theme') || ls.setItem('theme', 'light')
-		theme.set(initialTheme)
+		ls.setItem('theme', $theme)
 	})
 
 	export let segment;
