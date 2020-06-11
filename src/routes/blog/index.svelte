@@ -7,6 +7,7 @@
 </script>
 
 <script>
+	import PostList from '../../components/post-list.svelte'
 	export let posts;
 </script>
 
@@ -21,7 +22,7 @@
 	<title>Blog</title>
 </svelte:head>
 
-<h1>Recent posts</h1>
+<h1>Posts archive</h1>
 
 <ul>
 	{#if !posts.length}
@@ -32,6 +33,6 @@
 				tell Sapper to load the data for the page as soon as
 				the user hovers over the link or taps it, instead of
 				waiting for the 'click' event -->
-		<li><a rel='prefetch' href='blog/{post.slug}'>{post.title}</a></li>
+		<PostList {post} />
 	{/each}
 </ul>
