@@ -2,3 +2,13 @@ body {
   background: #242424;
   color: #dedede;
 }
+
+::-webkit-scrollbar-track {
+  background: #888888;
+}
+::-webkit-scrollbar-thumb {
+	background: #555;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #888;
+}
