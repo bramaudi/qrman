@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import { theme } from '../stores.js'
-	import Nav from '../components/Nav.svelte';
+	import Nav from '../components/nav.svelte';
 
 	onMount(() => {
 		const ls = window.localStorage
