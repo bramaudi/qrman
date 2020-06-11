@@ -12,13 +12,19 @@ function slugify(s) {
 
 const posts = []
 all.map(({ metadata, html, filename }) => {
-	const slug = slugify(filename)
-	const entry = {
-		...metadata,
-		html,
-		slug
+	// "title" & "date" are required fontmatter
+	// if not exist then mark it as a non-posts content
+	const { title, date } = metadata
+	if (title && date) {
+		const slug = slugify(filename)
+		const entry = {
+			...metadata,
+			html,
+			slug
+		}
+		// Exclude if post has "draft" frontmatter
+		!metadata.draft && posts.push(entry)
 	}
-	posts.push(entry)
 })
 
 export default posts
