@@ -13,9 +13,12 @@ function slugify(s) {
 const posts = []
 
 all.map(({ metadata, html, filename }) => {
-	// "title" & "date" are required fontmatter
+	// "title", "date", "tags" are required fontmatter
 	// if not exist then mark it as a non-posts content
 	const { title, date } = metadata
+	let { tags } = metadata
+
+	metadata.tags = tags || ['uncategorized']
 
 	if (title && date) {
 		const slug = slugify(filename)
