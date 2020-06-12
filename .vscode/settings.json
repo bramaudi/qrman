@@ -6,6 +6,7 @@
     "src/node_modules/@sapper/": true,
     "**/yarn-error.log": true,
     "cypress/screenshots/": true,
-    "__sapper__/": true
+    "__sapper__/": true,
+    "src/node_modules/": true
   }
 }
