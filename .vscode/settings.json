@@ -8,5 +8,6 @@
     "cypress/screenshots/": true,
     "__sapper__/": true,
     "src/node_modules/": true
-  }
+  },
+  "javascript.validate.enable": false
 }
