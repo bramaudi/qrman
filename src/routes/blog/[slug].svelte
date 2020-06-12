@@ -14,7 +14,13 @@
 </script>
 
 <script>
-	export let post;	
+	export let post;
+
+	function parseTags(tags) {
+		return tags.map(tag => {
+			return ` <a href="blog/tags/${tag}">${tag}</a>`
+		})
+	}
 </script>
 
 <style>
@@ -47,6 +53,8 @@
 </svelte:head>
 
 <h1>{post.title}</h1>
+
+{@html parseTags(post.tags)}
 
 <div class='content'>
 	{@html post.html}

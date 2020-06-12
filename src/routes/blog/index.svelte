@@ -22,7 +22,7 @@
 	<title>Blog</title>
 </svelte:head>
 
-<h1>Posts archive</h1>
+<h1>All Posts</h1>
 
 <ul>
 	{#if !posts.length}

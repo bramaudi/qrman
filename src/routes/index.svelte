@@ -1,30 +1,32 @@
+<script context="module">
+	export async function preload({ params, query }) {
+		const posts = await this.fetch(`blog.json`).then(r => r.json())
+		const tags = await this.fetch(`blog/tags.json`).then(r => r.json())
+		return { posts, tags }
+	}
+</script>
+
+<script>
+	import PostList from '../components/post-list.svelte'
+	export let posts;
+	export let tags;
+</script>
+
 <style>
-	h1, figure {
+	.title {
 		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
 		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
+		font-weight: bold;
+		font-size: 64px
 	}
-
-	figure {
+	figure img {
+		display: block;
+		margin: auto;
+		margin-bottom: 5rem;
+	}
+	ul {
 		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 150px;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
+		line-height: 1.5;
 	}
 </style>
 
@@ -32,9 +34,33 @@
 	<title>Home</title>
 </svelte:head>
 
-<h1>Greamt sumccess!</h1>
+<h1 class="title">Hamve Fumn!!</h1>
 
 <figure>
-	<img alt='Lil Bro' src='images/lil_bro.png'>
-	<figcaption>Have fun with Sapper!</figcaption>
+	<img src="images/lil_bro.png" alt="Lil Bro doge">
 </figure>
+
+<h1>Tags</h1>
+
+{#each tags.slice(0, 2) as tag}
+	<a href="blog/tags/{tag}">{tag}</a>, &nbsp;
+{/each}
+
+... see <a href="blog/tags">more tags</a>.
+
+<br><br>
+
+<h1>Recent posts</h1>
+
+<ul>
+	{#if !posts.length}
+		<li>There is no posts yet.</li>
+	{/if}
+	{#each posts.slice(0, 10) as post}
+		<!-- we're using the non-standard `rel=prefetch` attribute to
+				tell Sapper to load the data for the page as soon as
+				the user hovers over the link or taps it, instead of
+				waiting for the 'click' event -->
+		<PostList {post} />
+	{/each}
+</ul>
