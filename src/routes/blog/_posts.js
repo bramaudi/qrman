@@ -10,15 +10,23 @@ function slugify(s) {
   return s;
 }
 
+function dateFormat(date) {
+	const d = new Date(date)
+	const month = ['Jan', 'Feb', 'Mar', 'May', 'Jun', 'Jul', 'Ags', 'Sep', 'Oct', 'Nov', 'Dec']
+	return `${d.getFullYear()}, ${d.getDate()} ${month[d.getMonth()]}`
+}
+
 const posts = []
 
 all.map(({ metadata, html, filename }) => {
 	// "title", "date", "tags" are required fontmatter
 	// if not exist then mark it as a non-posts content
-	const { title, date } = metadata
-	let { tags } = metadata
+	const { title, date, tags } = metadata
 
+	// Set default tags if not defined
 	metadata.tags = tags || ['uncategorized']
+	// Format date
+	metadata.date = dateFormat(date)
 
 	if (title && date) {
 		const slug = slugify(filename)
