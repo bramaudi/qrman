@@ -25,6 +25,7 @@
 	font-weight: bold;
 	font-size: xx-large;
 	margin: .4rem 0;
+	line-height: 2.5rem;
 }
 .date {
 	margin-top: 5px;
