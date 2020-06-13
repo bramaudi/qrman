@@ -27,8 +27,4 @@
 
 <h1>Tags "{tags}"</h1>
 
-<ul>
-{#each posts as post}
-  <PostList {post} />
-{/each}
-</ul>
+<PostList {posts} />
