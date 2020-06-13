@@ -42,9 +42,11 @@
 
 <h1>Tags</h1>
 
-{#each tags.slice(0, 2) as tag}
-	<a href="blog/tags/{tag}">{tag}</a>, &nbsp;
-{/each}
+<div class="tags">
+	{#each tags.slice(0, 10) as tag}
+		<a href="blog/tags/{tag}">{tag}</a>
+	{/each}
+</div>
 
 ... see <a href="blog/tags">more tags</a>.
 
