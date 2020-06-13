@@ -27,7 +27,7 @@
 	margin: .4rem 0;
 }
 .date {
-	margin-top: -10px;
+	margin-top: 5px;
 	color: #888888;
 }
 .tags {
