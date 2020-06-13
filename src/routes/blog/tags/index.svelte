@@ -15,6 +15,8 @@
 
 <h1>Blog Tags</h1>
 
-{#each tags as tag}
-  <a href="blog/tags/{tag}">{tag}</a>, &nbsp;
-{/each}
+<div class="tags">
+	{#each tags as tag}
+		<a href="blog/tags/{tag}">{tag}</a>
+	{/each}
+</div>

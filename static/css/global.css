@@ -38,6 +38,17 @@ a {
 }
 
 
+.tags a {
+	display: inline-block;
+	text-decoration: none;
+	padding: .1rem .3rem;
+	margin: .4rem .4rem 0 0;
+	border-radius: 3px;
+	background: #323232;
+	color: #fff;
+}
+
+
 @media (min-width: 400px) {
 	body {
 		font-size: 16px;

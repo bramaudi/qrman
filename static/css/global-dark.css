@@ -3,6 +3,11 @@ body {
   color: #dedede;
 }
 
+.tags a {
+  background: #333333;
+  color: #ffffff;
+}
+
 ::-webkit-scrollbar-track {
   background: #888888;
 }

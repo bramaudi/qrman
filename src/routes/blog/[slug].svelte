@@ -15,47 +15,43 @@
 
 <script>
 	export let post;
-
-	function parseTags(tags) {
-		return tags.map(tag => {
-			return ` <a href="blog/tags/${tag}">${tag}</a>`
-		})
-	}
 </script>
 
 <style>
-	/*
-		By default, CSS is locally scoped to the component,
-		and any unused styles are dead-code-eliminated.
-		In this page, Svelte can't know which elements are
-		going to appear inside the {{{post.html}}} block,
-		so we have to use the :global(...) modifier to target
-		all elements inside .content
-	*/
-	.content :global(h2) {
-		font-size: 1.4em;
-		font-weight: 500;
-	}
-
-	.content :global(ul) {
-		line-height: 1.5;
-	}
-
-	.content :global(li) {
-		margin: 0 0 0.5em 0;
-	}
+.heading {
+	font-size: small
+}
+.title {
+	font-weight: bold;
+	font-size: xx-large;
+	margin: .4rem 0;
+}
+.date {
+	margin-top: -10px;
+	color: #888888;
+}
+.tags {
+	margin: 0;
+}
 </style>
 
 <svelte:head>
 	<title>{post.title}</title>
 	<script src="js/prism.js" />
+	<link rel="stylesheet" href="css/markdown.css">
 	<link rel="stylesheet" href="css/prism.css">
 </svelte:head>
 
-<h1>{post.title}</h1>
+<div class="heading">
+	<div class="date">{post.date}</div>
+	<div class="tags">
+		{#each post.tags as tag}
+			<a href="blog/tags/{tag}">{tag}</a>
+		{/each}
+	</div>
+</div>
 
-{@html parseTags(post.tags)}
-
-<div class='content'>
+<div class="title">{post.title}</div>
+<div class='markdown-body'>
 	{@html post.html}
 </div>
