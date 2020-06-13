@@ -3,9 +3,9 @@ title: Markdown Testing
 date: 2020-06-13 05:44:22
 ---
 
-## Hello Markdown
+Irure ipsum commodo aliquip ea aliquip et laborum. Enim ut do sint nisi eiusmod. Lorem aliquip laboris do nisi irure est ad laboris. Labore velit voluptate nulla ipsum sunt nulla ipsum. Anim sint tempor velit cupidatat nostrud esse exercitation non non labore ullamco labore fugiat ipsum.
 
-Just testing with markdown.
+![Lil bro](images/lil_bro.png)
 
 ## Syntax highlight
 
