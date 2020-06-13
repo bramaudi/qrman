@@ -40,4 +40,5 @@ all.map(({ metadata, html, filename }) => {
 	}
 })
 
-export default posts
+// Sorting array of posts by latest "date"
+export default posts.sort((a, b) => new Date(b.date) - new Date(a.date))
