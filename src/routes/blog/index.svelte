@@ -7,6 +7,7 @@
 </script>
 
 <script>
+	import { theme } from '../../stores.js'
 	import PostList from '../../components/post-list.svelte'
 	export let posts
 	let keyword = ''
@@ -31,13 +32,19 @@ label {
 input {
 	margin: 0 0 10px;
 	padding: 8px;
+	font-family: inherit;
 	background: #fff;
 	border: 1px solid #aaa;
+}
+.dark input {
+	color: #fff;
+	background: #333333;
+	border-color: #aaaaaa;
 }
 </style>
 
 <h1>All Posts</h1>
-<form>
+<form class:dark={$theme === 'dark'}>
 	<label for="search">Search</label>
 	<input type="text" id="search" bind:value={keyword} placeholder="Type post title">
 </form>
