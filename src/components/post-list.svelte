@@ -21,7 +21,7 @@ export let posts
 
 <ul class="posts-list">
 	{#if !posts.length}
-		<li>There is no posts yet.</li>
+		<li>There is no posts found.</li>
 	{/if}
   {#each posts as post}
     <li>
