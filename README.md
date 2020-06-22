@@ -8,11 +8,11 @@ To getting started just clone this repo.
 
 This fork added these following feaure:
 
-[X] Markdown posts
-[X] Custom front-matter
-[X] Tags feature in post
-[X] Toggle dark theme
-[ ] Posts pagination
+- [x] Markdown posts
+- [x] Custom front-matter
+- [x] Tags feature in post
+- [x] Toggle dark theme
+- [ ] Posts pagination
 
 ### Running the project
 
