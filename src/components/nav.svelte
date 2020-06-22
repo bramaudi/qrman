@@ -4,7 +4,7 @@
 	
 	function toggleTheme () {
 		const ls = window.localStorage
-		const newTheme = $theme === 'dark' ? theme.set('light') : theme.set('dark')
+		$theme === 'dark' ? theme.set('light') : theme.set('dark')
 		ls.setItem('theme', $theme)
 	}
 </script>

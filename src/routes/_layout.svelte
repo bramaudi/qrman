@@ -5,7 +5,11 @@
 
 	onMount(() => {
 		const ls = window.localStorage
-		ls.setItem('theme', $theme)
+		if (ls.getItem('theme')) {
+			$theme = ls.getItem('theme')
+		} else {
+			ls.setItem('theme', $theme)
+		}
 	})
 
 	export let segment;
