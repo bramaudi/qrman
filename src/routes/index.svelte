@@ -50,4 +50,4 @@
 
 <h1>Recent posts</h1>
 
-<PostList posts={posts.slice(0, 10)} />
+<PostList posts={posts[0]} />

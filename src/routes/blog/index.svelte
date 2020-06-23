@@ -49,10 +49,14 @@ input {
 	<input type="text" id="search" bind:value={keyword} placeholder="Type post title">
 </form>
 
-{#each posts as data}
-	{#if keyword === ''}
-		<PostList posts={data} />
-	{:else}
-		<PostList posts={filteredPosts(data, keyword)} />
-	{/if}
+{#each posts as data, key}
+	<li>Page: {key + 1}</li>
+
+	<ul>
+		{#if keyword === ''}
+			<PostList posts={data} />
+		{:else}
+			<PostList posts={filteredPosts(data, keyword)} />
+		{/if}
+	</ul>
 {/each}
