@@ -1,4 +1,5 @@
-import posts from '../_posts.js';
+import { metaOnly as posts } from '../_posts.js'
+import paginationPosts from '../../../paginationPosts.js'
 
 export function get(req, res, next) {
 	const { tags } = req.params;
@@ -7,5 +8,5 @@ export function get(req, res, next) {
 	res.writeHead(200, {
 		'Content-Type': 'application/json'
 	})
-	res.end(JSON.stringify(contents));
+	res.end(JSON.stringify(paginationPosts(contents)));
 }

@@ -7,7 +7,8 @@
 		if (res.status === 200) {
 			return {
         posts,
-        tags
+        tags,
+        query
       };
 		} else {
 			this.error(res.status, data.message);
@@ -17,8 +18,11 @@
 
 <script>
   import PostList from '../../../components/post-list.svelte'
-  export let posts;
-  export let tags;
+  import Pagination from '../../../components/pagination.svelte'
+  export let posts
+  export let tags
+  export let query
+  $: current = query.page || 1
 </script>
 
 <svelte:head>
@@ -27,4 +31,6 @@
 
 <h1>Tags "{tags}"</h1>
 
-<PostList {posts} />
+<PostList posts={posts[current -1]} />
+
+<Pagination {current} count={posts.length} link="blog/tags/{tags}" />
