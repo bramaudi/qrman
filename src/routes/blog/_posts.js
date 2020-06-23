@@ -17,9 +17,10 @@ function dateFormat(date) {
 }
 
 const posts = []
+export const metaOnly = []
 
 all.map(({ metadata, html, filename }) => {
-	// "title", "date", "tags" are required fontmatter
+	// "title", "date", "tags" are required frontmatter
 	// if not exist then mark it as a non-posts content
 	const { title, date, tags } = metadata
 
@@ -36,9 +37,16 @@ all.map(({ metadata, html, filename }) => {
 			slug
 		}
 		// Exclude if post has "draft" frontmatter
-		!metadata.draft && posts.push(entry)
+		if (!metadata.draft) {
+			posts.push(entry)
+
+			// Push for meta-only version
+			metaOnly.push({
+				...metadata,
+				slug
+			})
+		}
 	}
 })
 
-// Sorting array of posts by latest "date"
-export default posts.sort((a, b) => new Date(b.date) - new Date(a.date))
+export default posts

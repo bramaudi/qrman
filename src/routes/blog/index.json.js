@@ -1,4 +1,4 @@
-import posts from './_posts.js'
+import posts from './_pagination.js'
 
 const contents = JSON.stringify(posts);
 
