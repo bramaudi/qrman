@@ -6,11 +6,12 @@ This are forked repo from the original [Sapper](https://github.com/sveltejs/sapp
 
 This fork added these following feaure:
 
-- [x] Markdown posts
-- [x] Custom front-matter
-- [x] Tags feature in post
 - [x] Toggle dark theme
-- [ ] Posts pagination
+- [x] Markdown posts
+- [x] Draft posts
+- [x] Tags feature in post
+- [x] Custom front-matter
+- [x] Posts pagination
 
 ## Structure
 
