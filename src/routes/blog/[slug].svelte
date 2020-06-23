@@ -24,11 +24,10 @@
 .title {
 	font-weight: bold;
 	font-size: xx-large;
-	margin: .4rem 0;
+	margin: 0 0 1.5rem 0;
 	line-height: 2.5rem;
 }
 .date {
-	margin-top: 5px;
 	color: #888888;
 }
 .tags {
@@ -44,6 +43,7 @@
 </svelte:head>
 
 <div class="heading">
+	<div class="title">{post.title}</div>
 	<div class="date">{post.date}</div>
 	<div class="tags">
 		{#each post.tags as tag}
@@ -52,7 +52,6 @@
 	</div>
 </div>
 
-<div class="title">{post.title}</div>
 <div class='markdown-body'>
 	{@html post.html}
 </div>
