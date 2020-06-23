@@ -28,13 +28,14 @@
 </style>
 
 <svelte:head>
-	<title>{status}</title>
+	<title>{dev && error.stack ? status : '404'}</title>
 </svelte:head>
 
-<h1>{status}</h1>
-
-<p>{error.message}</p>
-
 {#if dev && error.stack}
+	<h1>{status}</h1>
+	<p>{error.message}</p>
 	<pre>{error.stack}</pre>
+{:else}
+	<h1>404</h1>
+	<p>Page is not found.</p>
 {/if}
