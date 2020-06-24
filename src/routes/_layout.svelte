@@ -18,9 +18,9 @@
 <style>
 	main {
 		position: relative;
-		max-width: 56em;
+    max-width: 555px;
 		padding: 2em;
-		margin: 0 auto;
+    margin: 0 auto;
 		box-sizing: border-box;
 	}
 </style>
@@ -40,7 +40,8 @@
 
 	body {
 		background: #242424;
-		color: #dedede;
+    color: #dedede;
+    border-color: #333;
 	}
 
 	.tags a {
@@ -74,8 +75,8 @@
 	{/if}
 </svelte:head>
 
-<Nav {segment}/>
-
 <main class:dark={$theme === 'dark'}>
 	<slot></slot>
 </main>
+
+<Nav {segment}/>

@@ -1,8 +1,10 @@
 body {
-	margin: 0;
+	margin: 10% auto;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 	font-size: 16px;
-	line-height: 1.5;
+  line-height: 1.5;
+  max-width: 550px;
+  border: 3px solid #aaa;
 	background: #f0f0f0;
 	color: #222222;
 }
@@ -48,9 +50,11 @@ a {
 	color: #fff;
 }
 
-
-@media (min-width: 400px) {
-	body {
-		font-size: 16px;
-	}
+@media (max-width: 555px) {
+  body {
+    border: none;
+    font-size: 16px;
+    margin: auto;
+    padding-bottom: 66px;
+  }
 }

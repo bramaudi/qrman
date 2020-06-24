@@ -1,53 +1,91 @@
-<script context="module">
-	export async function preload({ params, query }) {
-		const posts = await this.fetch(`blog.json`).then(r => r.json())
-		const tags = await this.fetch(`blog/tags.json`).then(r => r.json())
-		return { posts, tags }
-	}
-</script>
-
-<script>
-	import PostList from '../components/post-list.svelte'
-	export let posts;
-	export let tags;
-</script>
-
-<style>
-	.title {
-		text-align: center;
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 64px
-	}
-	figure img {
-		display: block;
-		margin: auto;
-		margin-bottom: 5rem;
-	}
-</style>
-
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-<h1 class="title">Hamve Fumn!!</h1>
+<script>
+  import { onMount } from 'svelte'
+  import { result, theme } from '../stores.js'
+  import QRScanner from '../qr-scanner.min.js'
+	import Form from './../components/form.svelte';
+  
+  QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
+  let notFound = false
+  let loading = false
 
-<figure>
-	<img src="images/lil_bro.png" alt="Lil Bro doge">
-</figure>
+  onMount(() => {
+    scanCode()
+  })
 
-<h1>Tags</h1>
+  const scanCode = (replaceSrc) => {
+    const output = document.getElementById('output_image');
+    output.src = replaceSrc || output.src
 
-<div class="tags">
-	{#each tags.slice(0, 10) as tag}
-		<a href="blog/tags/{tag}">{tag}</a>
-	{/each}
+    QRScanner
+      .scanImage(output.src)
+      .then(res => {
+        notFound = false        
+        result.set(res)
+      })
+      .catch(() => {
+        notFound = true        
+      })
+      .finally(() => {
+        loading = false
+      })
+  }
+  
+  const previewImage = (event) => {
+    loading = true
+    const reader = new FileReader();
+    reader.onload = () => {
+      scanCode(reader.result)
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+<style>
+  .preview_box {
+    width: 90%;
+    max-height: 50vh;
+    overflow: auto;
+    margin: 1rem auto 1.5rem;
+    padding: 0;
+    border: 3px solid #aaaaaa;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+  p { text-align: center; }
+  .result {
+    padding: 10px;
+    margin: .5rem auto;
+    background: #dddddd;
+    border-left: 5px solid cornflowerblue;
+  }
+  .result.dark {
+    background: #323232;
+  }
+</style>
+
+<div class="preview_box">
+  <img id="output_image" src="images/meqrthumb.png" alt="Preview">
 </div>
 
-... see <a href="blog/tags">more tags</a>.
+<Form func={previewImage} />
 
-<br><br>
+{#if loading}
+  <p>Processing file ...</p>
+{:else}
 
-<h1>Recent posts</h1>
+  {#if !notFound && $result}
+    <strong>Result:</strong>
+    <div class="result" class:dark={$theme === 'dark'}>{$result}</div>
+  {:else}
+    <p>Sorry, can't find the QR Code ... :'(</p>
+  {/if}
 
-<PostList posts={posts[0]} />
+{/if}
