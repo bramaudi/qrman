@@ -37,4 +37,4 @@
 
 <br>
 
-<p>This is the 'about' page. There's not much here.</p>
+<p>Hello there! <strong>QR-Man</strong> can help you to handle QR Code things.</p>

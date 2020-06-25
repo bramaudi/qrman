@@ -9,14 +9,16 @@
 	import Form from './../components/form.svelte';
   
   QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
+
   let notFound = false
-  let loading = false
+  let loading = true
 
   onMount(() => {
     scanCode()
   })
 
   const scanCode = (replaceSrc) => {
+    loading = true
     const output = document.getElementById('output_image');
     output.src = replaceSrc || output.src
 
@@ -35,7 +37,6 @@
   }
   
   const previewImage = (event) => {
-    loading = true
     const reader = new FileReader();
     reader.onload = () => {
       scanCode(reader.result)
@@ -46,18 +47,24 @@
 
 <style>
   .preview_box {
-    width: 90%;
-    max-height: 50vh;
+    width: 100%;
+    max-height: 40vh;
     overflow: auto;
-    margin: 1rem auto 1.5rem;
+    margin: 0 0 1.5rem;
     padding: 0;
-    border: 3px solid #aaaaaa;
+    border: 3px solid #dedede;
   }
   img {
     display: block;
     width: 100%;
     height: auto;
     margin: 0;
+  }
+  .divider {
+    width: 75%;
+    margin: 1.5rem auto;
+    border-radius: 80%;
+    border: 1px solid #cccccc;
   }
   p { text-align: center; }
   .result {
@@ -66,26 +73,35 @@
     background: #dddddd;
     border-left: 5px solid cornflowerblue;
   }
-  .result.dark {
+  .dark .divider {
+    border-color: #323232;
+  }
+  .dark .preview_box {
+    border-color: #565656;
+  }
+  .dark .result {
     background: #323232;
   }
 </style>
 
-<div class="preview_box">
-  <img id="output_image" src="images/meqrthumb.png" alt="Preview">
-</div>
+<div class:dark={$theme === 'dark'}>
+  <div class="preview_box">
+    <img id="output_image" src="images/meqrthumb.png" alt="Preview">
+  </div>
 
-<Form func={previewImage} />
+  <Form func={previewImage} />
 
-{#if loading}
-  <p>Processing file ...</p>
-{:else}
+  <div class="divider"></div>
 
-  {#if !notFound && $result}
-    <strong>Result:</strong>
-    <div class="result" class:dark={$theme === 'dark'}>{$result}</div>
+  {#if loading}
+    <p>Processing file ...</p>
   {:else}
-    <p>Sorry, can't find the QR Code ... :'(</p>
-  {/if}
 
-{/if}
+    {#if !notFound && $result}
+      <div class="result">{$result}</div>
+    {:else}
+      <p>Sorry, can't find the QR Code ... :'(</p>
+    {/if}
+
+  {/if}
+</div>

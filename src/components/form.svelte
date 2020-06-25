@@ -9,7 +9,7 @@
   label {
     cursor: pointer;
     display: block;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
     padding: .5rem;
     width: max-content;
     border-radius: 3px;

@@ -17,8 +17,6 @@
 
 <style>
 	main {
-		position: relative;
-    max-width: 555px;
 		padding: 2em;
     margin: 0 auto;
 		box-sizing: border-box;

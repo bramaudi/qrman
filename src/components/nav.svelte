@@ -11,19 +11,19 @@
 
 <style>
 	nav {
+    position: relative;
+		font-weight: 300;
+	}
+
+	ul {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-		font-weight: 300;
-		padding: 0 1rem;
-		background: #ffffff;
-	}
-
-	ul {
 		display: flex;
 		margin: 0;
-		padding: 0;
+		padding: 0 calc((100vw - 500px) / 2);
+		background: #ffffff;
 	}
 
 	/* clearfix */
@@ -63,27 +63,17 @@
 	}
 
 	/* Dark */
-	nav.dark {
+	.dark ul {
 		background: #333333;
 		color: #ffffff;
 	}
 	.dark [aria-current]::after {
 		background: #aaaaaa
   }
-  
-  @media only screen and (min-width: 555px) {
-    nav {
-      position: static;
-      max-width: 555px;
-      width: auto;
-    }
-  }
 
-	@media only screen and (min-width: 784px) {
-		nav {
-			padding: 0 calc(100vw - 60em);
-		}
-	}
+  @media screen and (min-width: 784px) {
+
+  }
 </style>
 
 <nav class:dark={$theme === 'dark'}>
