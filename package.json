@@ -13,6 +13,7 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
+    "clipboard": "^2.0.6",
     "compression": "^1.7.1",
     "polka": "next",
     "qr-scanner": "^1.1.1",

@@ -15,6 +15,16 @@
 	export let segment;
 </script>
 
+{#if segment === 'webcam'}
+	<slot></slot>
+{:else}
+	<main class:dark={$theme === 'dark'}>
+		<slot></slot>
+	</main>
+
+	<Nav {segment}/>
+{/if}
+
 <style>
 	main {
 		padding: 2em;
@@ -72,9 +82,3 @@
 	</style>
 	{/if}
 </svelte:head>
-
-<main class:dark={$theme === 'dark'}>
-	<slot></slot>
-</main>
-
-<Nav {segment}/>
