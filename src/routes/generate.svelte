@@ -5,7 +5,7 @@
 {/if}
 
 <video></video>
-<div>{result}</div>
+<h2>{result}</h2>
 
 <script>
   import { onMount } from 'svelte';
@@ -29,10 +29,9 @@
 
     const scanner = new QRScanner(video, res => {
       result = res
+      alert(res)
     })
     scanner.start()
-
-    if (result) scanner.pause()
   }
 </script>
 
