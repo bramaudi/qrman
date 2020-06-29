@@ -2,6 +2,29 @@
 	<title>Home</title>
 </svelte:head>
 
+<div class:dark={$theme === 'dark'}>
+  <div class="preview_box">
+    <video></video>
+    <img id="output_image" src="images/meqrthumb.png" alt="Preview">
+  </div>
+
+  <Form func={previewImage} />
+
+  <div class="divider"></div>
+
+  {#if loading}
+    <p>Processing file ...</p>
+  {:else}
+
+    {#if !notFound && $result}
+      <div class="result">{$result}</div>
+    {:else}
+      <p>Sorry, can't find the QR Code ... :'(</p>
+    {/if}
+
+  {/if}
+</div>
+
 <script>
   import { onMount } from 'svelte'
   import { result, theme } from '../stores.js'
@@ -83,25 +106,3 @@
     background: #323232;
   }
 </style>
-
-<div class:dark={$theme === 'dark'}>
-  <div class="preview_box">
-    <img id="output_image" src="images/meqrthumb.png" alt="Preview">
-  </div>
-
-  <Form func={previewImage} />
-
-  <div class="divider"></div>
-
-  {#if loading}
-    <p>Processing file ...</p>
-  {:else}
-
-    {#if !notFound && $result}
-      <div class="result">{$result}</div>
-    {:else}
-      <p>Sorry, can't find the QR Code ... :'(</p>
-    {/if}
-
-  {/if}
-</div>
