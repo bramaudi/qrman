@@ -1,71 +1,43 @@
-<h1>Scan from WebCam:</h1>
-<div>
-    <b>Device has camera: </b>
-    <span bind:this={camHasCamera}></span>
-    <br>
-    <video muted playsinline bind:this={video}></video>
-</div>
-<div>
-    <select bind:this={inversionModeSelect}>
-        <option value="original">Scan original (dark QR code on bright background)</option>
-        <option value="invert">Scan with inverted colors (bright QR code on dark background)</option>
-        <option value="both">Scan both</option>
-    </select>
-    <br>
-</div>
-<b>Detected QR code: </b>
-<span bind:this={camQrResult}>None</span>
-<br>
-<b>Last detected at: </b>
-<span bind:this={camQrResultTimestamp}></span>
+<h1>Webcam Test</h1>
 
-<hr>
+{#if !hasCamera}
+  <p>Sorry, we can't get access the camera.</p>
+{/if}
 
-<h1>Scan from File:</h1>
-<input type="file" bind:this={fileSelector}>
-<b>Detected QR code: </b>
-<span bind:this={fileQrResult}>None</span>
+<video></video>
+<div>{result}</div>
 
 <script>
-  import QrScanner from "../qr-scanner.min.js";
-  QrScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js';
+  import { onMount } from 'svelte';
+  import QRScanner from '../qr-scanner.min.js';
+  QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js';
 
-  let video,
-      camHasCamera,
-      camQrResult,
-      camQrResultTimestamp,
-      fileSelector,
-      fileQrResult,
-      inversionModeSelect
+  let result
+  let hasCamera = false
 
-  function setResult(label, result) {
-    label.textContent = result;
-    camQrResultTimestamp.textContent = new Date().toString();
-    label.style.color = 'teal';
-    clearTimeout(label.highlightTimeout);
-    label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+  QRScanner.hasCamera().then(res => {
+    console.log('hasCamera: ', res)
+    hasCamera = res
+  })
+
+  onMount(() => {
+    init()
+  })
+
+  function init() {
+    const video = document.querySelector('video')
+
+    const scanner = new QRScanner(video, res => {
+      result = res
+    })
+    scanner.start()
+
+    if (result) scanner.pause()
   }
-
-  // ####### Web Cam Scanning #######
-
-  QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
-
-  const scanner = new QrScanner(video, result => setResult(camQrResult, result));
-  scanner.start();
-
-  inversionModeSelect.addEventListener('change', event => {
-    scanner.setInversionMode(event.target.value);
-  });
-
-  // ####### File Scanning #######
-
-  fileSelector.addEventListener('change', event => {
-    const file = fileSelector.files[0];
-    if (!file) {
-        return;
-    }
-    QrScanner.scanImage(file)
-      .then(result => setResult(fileQrResult, result))
-      .catch(e => setResult(fileQrResult, e || 'No QR code found.'));
-  });
 </script>
+
+<style>
+  video {
+    width: 100%;
+  }
+</style>
