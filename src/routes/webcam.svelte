@@ -7,7 +7,7 @@
   {#if result}
     <div class="result">
       <input type="text" id="msg" value={result}>
-      <button on:click={setCopied} class="copy tooltip" data-clipboard-target="#msg"><CopyIcon /> Copy all</button>
+      <button on:click={setCopied} class="copy" data-clipboard-target="#msg"><CopyIcon /> Copy all</button>
       <button on:click={close} class="close"><CloseIcon /> Close</button>
       {#if copied} <Toast>Copied!</Toast> {/if}
     </div>
@@ -143,40 +143,5 @@
     width: 16px;
     float: left;
     margin-right: .4rem;
-  }
-  .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted darkslategrey;
-  }
-
-  .tooltip ~ .tooltip-text {
-    visibility: hidden;
-    width: 120px;
-    background-color: darkslategrey;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 90%;
-    left: 40%;
-    margin-left: -60px;
-  }
-
-  .tooltip ~ .tooltip-text::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent darkslategrey transparent;
-  }
-
-  .tooltip.success ~ .tooltip-text {
-    visibility: visible;
   }
 </style>
