@@ -1,9 +1,23 @@
-<label for="uploadForm"><ImageIcon /> Select image file</label>
+<label bind:this={labelForm} for="uploadForm">
+  <div>
+    <Icon />
+    <div>Select image file</div>
+  </div>
+</label>
+
 <input id="uploadForm" type="file" accept="image/*" on:change={func}>
 
 <script>
+  import { onMount } from 'svelte';
+  import Icon from '../components/icon/image.svelte'
+  
   export let func
-  import ImageIcon from '../components/icon/image.svelte'
+  let labelForm
+
+  onMount(() => {
+    labelForm.style.width = labelForm.clientWidth + 'px'
+    labelForm.style.height = labelForm.clientWidth + 'px'
+  })
 </script>
 
 <style>
@@ -12,19 +26,23 @@
   }
   label {
     cursor: pointer;
-    display: inline-block;
-    padding: .5rem;
-    width: max-content;
-    border-radius: 3px;
-    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    border-radius: 100%;
     background: cornflowerblue;
+    color: #fff
   }
   label:hover {
     background: #537fd1;
   }
   label :global(svg) {
-    width: 16px;
-    float: left;
-    margin-right: .4rem;
+    display: block;
+    width: 30px;
+    height: auto;
+    margin: auto auto .5rem;
   }
 </style>

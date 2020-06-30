@@ -3,14 +3,12 @@
 </svelte:head>
 
 <div class:dark={$theme === 'dark'}>
-
-  <h1>Scan</h1>
-
-  <div class="preview_box" class:show={output}>
-    <img bind:this={preview} alt="Preview">
-  </div>
+  <WebcamButton />
+  <div class="divider"></div>
+  <Form func={previewImage} />
 
   {#if output}
+    <br>
     {#if loading}
       <p>Processing file ...</p>
     {:else}
@@ -28,22 +26,22 @@
         <p>Sorry, can't find the QR Code ... :'(</p>
       {/if}
     {/if}
-    <div class="divider"></div>
   {/if}
-  
-  <Form func={previewImage} />
-  <a href="/webcam" class="button"><VideoIcon /> Open Webcam</a>
 
+  <div class="preview_box" class:show={output}>
+    <img bind:this={preview} alt="Preview">
+  </div>
+  
 </div>
 
 <script>
   import { result, theme } from '../stores.js';
   import Toast from '../components/toast.svelte';
+  import WebcamButton from '../components/webcam-button.svelte';
   import QRScanner from '../qr-scanner.min.js';
   import Clipboard from 'clipboard';
   import isUrl from 'is-url';
   import Form from './../components/form.svelte';
-  import VideoIcon from '../components/icon/video.svelte';
   import CopyIcon from '../components/icon/copy.svelte';
   
   QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
@@ -102,33 +100,16 @@
   .preview_box.show {
     display: block;
   }
-  .button {
-    cursor: pointer;
-    display: inline-block;
-    padding: .5rem;
-    margin: 5px 5px 0 0;
-    text-decoration: none;
-    width: max-content;
-    border-radius: 3px;
-    border: none;
-    color: white;
-    background: cornflowerblue;
-  }
-  .button:hover {
-    background: #537fd1;
-  }
-  .button :global(svg) {
-    width: 16px;
-    float: left;
-    margin-right: .4rem;
-  }
   .copy {
+    border: none;
     display: inline-block;
     padding: .2rem .5rem;
     font-style: inherit;
     font-size: small;
     line-height: 1.5rem;
+    border-radius: 3px;
     background: cadetblue;
+    color: white
   }
   .copy:hover {
     background: #aaa;
@@ -154,6 +135,7 @@
   .result {
     padding: 10px;
     margin: .5rem auto;
+    word-break: break-word;
     background: #dddddd;
     border-left: 5px solid cornflowerblue;
   }
