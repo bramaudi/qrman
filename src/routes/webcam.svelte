@@ -100,7 +100,7 @@
     background: cornflowerblue;
   }
   .back {
-    position: absolute;
+    position: fixed;
     z-index: 3;
     bottom: 2rem;
     padding: .2rem .8rem .2rem .5rem;
@@ -149,7 +149,7 @@
     border-color: transparent transparent darkslategrey transparent;
   }
 
-  .tooltip.success ~ .tooltip-text {
+  .tooltip:focus ~ .tooltip-text {
     visibility: visible;
   }
 </style>

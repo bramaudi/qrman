@@ -1,34 +1,38 @@
 <svelte:head>
-	<title>Home</title>
+	<title>QRMan | Scan</title>
 </svelte:head>
 
 <div class:dark={$theme === 'dark'}>
 
-  <Form func={previewImage} />
-  
-  {#if loading}
-    <p>Processing file ...</p>
-  {:else}
-    {#if !notFound && $result}
-      <div class="result" id="msg">{$result}</div>
-      <button class="copy button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
-    {:else}
-      <p>Sorry, can't find the QR Code ... :'(</p>
-    {/if}
-  {/if}
+  <h1>Scan</h1>
 
-  Image preview:
-  <div class="preview_box">
-    <img bind:this={output} src="images/meqrthumb.png" alt="Preview">
+  <div class="preview_box" class:show={output}>
+    <img bind:this={preview} alt="Preview">
   </div>
 
-  <div class="divider"></div>
+  {#if output}
+    {#if loading}
+      <p>Processing file ...</p>
+    {:else}
+      {#if !notFound && $result}
+        <div class="result" id="msg">
+          {$result}
+        </div>
+        <button class="copy tooltip button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
+        <div class="tooltip-text">Copied!</div>
+      {:else}
+        <p>Sorry, can't find the QR Code ... :'(</p>
+      {/if}
+    {/if}
+    <div class="divider"></div>
+  {/if}
+  
+  <Form func={previewImage} />
   <a href="/webcam" class="button">Open Webcam <RightArrow /></a>
 
 </div>
 
 <script>
-  import { onMount } from 'svelte';
   import { result, theme } from '../stores.js';
   import QRScanner from '../qr-scanner.min.js';
   import Clipboard from 'clipboard';
@@ -38,21 +42,17 @@
   
   QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
 
-  let output
+  let preview
+  let output = false
   let notFound = false
-  let loading = true
-
-  onMount(() => {
-    scanCode()
-    new Clipboard('.copy')
-  })
+  let loading = false
 
   const scanCode = (replaceSrc) => {
     loading = true
-    output.src = replaceSrc || output.src
+    preview.src = replaceSrc
 
     QRScanner
-      .scanImage(output.src)
+      .scanImage(replaceSrc)
       .then(res => {
         notFound = false        
         result.set(res)
@@ -69,6 +69,7 @@
     const reader = new FileReader();
     reader.onload = () => {
       scanCode(reader.result)
+      output = true
     }
     reader.readAsDataURL(event.target.files[0]);
   }
@@ -76,12 +77,16 @@
 
 <style>
   .preview_box {
+    display: none;
     width: 100%;
     max-height: 30vh;
     overflow: auto;
     margin: .5rem 0 1.5rem;
     padding: 0;
     border: 3px solid #dedede;
+  }
+  .preview_box.show {
+    display: block;
   }
   .button {
     cursor: pointer;
@@ -103,10 +108,8 @@
     margin-left: .4rem;
   }
   .copy {
-    display: block;
-    float: right;
+    display: inline-block;
     padding: .2rem .5rem;
-    margin-bottom: 1rem;
     font-style: inherit;
     font-size: small;
     line-height: 1.5rem;
@@ -126,6 +129,41 @@
     width: 100%;
     height: auto;
     margin: 0;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted darkslategrey;
+  }
+
+  .tooltip ~ .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: darkslategrey;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 56.5%;
+    left: 50%;
+    margin-left: -60px;
+  }
+
+  .tooltip ~ .tooltip-text::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent darkslategrey transparent transparent;
+  }
+
+  .tooltip:focus ~ .tooltip-text {
+    visibility: visible;
   }
   .divider {
     width: 75%;
