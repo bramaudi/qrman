@@ -16,7 +16,11 @@
     {:else}
       {#if !notFound && $result}
         <div class="result" id="msg">
-          {$result}
+          {#if isUrl($result)}
+            <a href={$result}>{$result}</a>
+          {:else}
+            {$result}
+          {/if}
         </div>
         <button on:click={setCopied} class="copy button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
         {#if copied} <Toast>Copied!</Toast> {/if}
@@ -37,6 +41,7 @@
   import Toast from '../components/toast.svelte';
   import QRScanner from '../qr-scanner.min.js';
   import Clipboard from 'clipboard';
+  import isUrl from 'is-url';
   import Form from './../components/form.svelte';
   import VideoIcon from '../components/icon/video.svelte';
   import CopyIcon from '../components/icon/copy.svelte';
