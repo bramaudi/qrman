@@ -5,9 +5,6 @@
     'Faster camera to focus, faster the scan',
     'Have enought brightness is good',
     'Capturing in flat background color is recommended',
-    'Capturing in flat background color is recommended',
-    'Capturing in flat background color is recommended',
-    'Flat background prevent the pattern conflict',
   ]
 </script>
 
