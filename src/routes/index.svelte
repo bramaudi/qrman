@@ -18,8 +18,7 @@
         <div class="result" id="msg">
           {$result}
         </div>
-        <button class="copy tooltip button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
-        <div class="tooltip-text">Copied!</div>
+        <button class="copy button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
       {:else}
         <p>Sorry, can't find the QR Code ... :'(</p>
       {/if}
@@ -66,10 +65,10 @@
   }
   
   const previewImage = (event) => {
+    output = true
     const reader = new FileReader();
     reader.onload = () => {
       scanCode(reader.result)
-      output = true
     }
     reader.readAsDataURL(event.target.files[0]);
   }
@@ -92,6 +91,7 @@
     cursor: pointer;
     display: inline-block;
     padding: .5rem;
+    margin: 5px 5px 0 0;
     text-decoration: none;
     width: max-content;
     border-radius: 3px;
@@ -129,41 +129,6 @@
     width: 100%;
     height: auto;
     margin: 0;
-  }
-  .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted darkslategrey;
-  }
-
-  .tooltip ~ .tooltip-text {
-    visibility: hidden;
-    width: 120px;
-    background-color: darkslategrey;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 56.5%;
-    left: 50%;
-    margin-left: -60px;
-  }
-
-  .tooltip ~ .tooltip-text::after {
-    content: " ";
-    position: absolute;
-    top: 50%;
-    right: 100%; /* To the left of the tooltip */
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent darkslategrey transparent transparent;
-  }
-
-  .tooltip:focus ~ .tooltip-text {
-    visibility: visible;
   }
   .divider {
     width: 75%;
