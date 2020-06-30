@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>About</title>
+	<title>QRMan | About</title>
 </svelte:head>
 
 <script>

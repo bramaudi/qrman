@@ -2,12 +2,14 @@
 {#if !hasCamera}
   <div class="error">Sorry, unable to access camera.</div>
 {:else}
+  <div class="crosshair"></div>
+  <CamTips />
   {#if result}
     <div class="result">
       <input type="text" id="msg" value={result}>
-      <button on:click={setTooltip} class="copy tooltip" data-clipboard-target="#msg"><CopyIcon /> Copy all</button>
+      <button on:click={setCopied} class="copy tooltip" data-clipboard-target="#msg"><CopyIcon /> Copy all</button>
       <button on:click={close} class="close"><CloseIcon /> Close</button>
-      <div class="tooltip-text">Copied!</div>
+      {#if copied} <Toast>Copied!</Toast> {/if}
     </div>
   {/if}
 {/if}
@@ -18,13 +20,15 @@
   import LeftArrow from '../components/icon/arrow-left.svelte';
   import CopyIcon from '../components/icon/copy.svelte';
   import CloseIcon from '../components/icon/x.svelte';
+  import CamTips from '../components/cam-tips.svelte';
+  import Toast from '../components/toast.svelte';
   import Clipboard from 'clipboard';
   import QRScanner from '../qr-scanner.min.js';
   QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js';
 
-  let scanner
-  let result
-  let hasCamera
+  let scanner, result
+  let copied = false
+  let hasCamera = true
 
   QRScanner.hasCamera().then(res => {
     hasCamera = res
@@ -48,8 +52,11 @@
     scanner.stop()
   }
 
-  function setTooltip() {
-    document.querySelector('button.copy').classList.add('success')
+  function setCopied() {
+    copied = true
+    setTimeout(() => {
+      copied = false
+    }, 3500)
   }
 
   function close() {
@@ -66,6 +73,16 @@
     height: 100%;
     background: #222;
     color: #eeeeee
+  }
+  .crosshair {
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    margin: -15% 0 0 -15%;
+    width: 30vw;
+    height: 30vw;
+    border: 3px solid rgba(255,0,0,0.3)
   }
   .error, .result {
     position: fixed;
@@ -144,7 +161,7 @@
     position: absolute;
     z-index: 1;
     top: 90%;
-    left: 50%;
+    left: 40%;
     margin-left: -60px;
   }
 

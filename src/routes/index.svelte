@@ -18,7 +18,8 @@
         <div class="result" id="msg">
           {$result}
         </div>
-        <button class="copy button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
+        <button on:click={setCopied} class="copy button" data-clipboard-target="#msg"><CopyIcon/> Copy to clipboard</button>
+        {#if copied} <Toast>Copied!</Toast> {/if}
       {:else}
         <p>Sorry, can't find the QR Code ... :'(</p>
       {/if}
@@ -27,20 +28,22 @@
   {/if}
   
   <Form func={previewImage} />
-  <a href="/webcam" class="button">Open Webcam <RightArrow /></a>
+  <a href="/webcam" class="button"><VideoIcon /> Open Webcam</a>
 
 </div>
 
 <script>
   import { result, theme } from '../stores.js';
+  import Toast from '../components/toast.svelte';
   import QRScanner from '../qr-scanner.min.js';
   import Clipboard from 'clipboard';
   import Form from './../components/form.svelte';
-  import RightArrow from '../components/icon/arrow-right.svelte';
+  import VideoIcon from '../components/icon/video.svelte';
   import CopyIcon from '../components/icon/copy.svelte';
   
   QRScanner.WORKER_PATH = 'js/qr-scanner-worker.min.js'
 
+  let copied = false
   let preview
   let output = false
   let notFound = false
@@ -71,6 +74,13 @@
       scanCode(reader.result)
     }
     reader.readAsDataURL(event.target.files[0]);
+  }
+
+  function setCopied() {
+    copied = true
+    setTimeout(() => {
+      copied = false
+    }, 3500)
   }
 </script>
 
@@ -104,8 +114,8 @@
   }
   .button :global(svg) {
     width: 16px;
-    float: right;
-    margin-left: .4rem;
+    float: left;
+    margin-right: .4rem;
   }
   .copy {
     display: inline-block;

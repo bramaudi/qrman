@@ -28,7 +28,7 @@
 <style>
 	main {
 		padding: 2em;
-    margin: 0 auto;
+    margin: 0 auto 3rem;
 		box-sizing: border-box;
 	}
 </style>
