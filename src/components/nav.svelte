@@ -78,9 +78,9 @@
 
 <nav class:dark={$theme === 'dark'}>
 	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">Scan</a></li>
-		<li><a aria-current="{segment === 'generate' ? 'page' : undefined}" href="generate">Generate</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">About</a></li>
+		<li><a rel="prefetch" aria-current="{segment === undefined ? 'page' : undefined}" href=".">Scan</a></li>
+		<li><a rel="prefetch" aria-current="{segment === 'generate' ? 'page' : undefined}" href="generate">Generate</a></li>
+		<li><a rel="prefetch" aria-current="{segment === 'about' ? 'page' : undefined}" href="about">About</a></li>
     <li><span class="toggle" on:click={toggleTheme} type="button">{$theme}</span></li>
 	</ul>
 </nav>
