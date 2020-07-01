@@ -10,12 +10,8 @@
   <label for="size">Size:</label>
   <input type="range" id="size" bind:value={inpSize} on:input={resize} min="30" max="300">
 
-  <div class="output" bind:this={output}></div>
+  <div class="output" bind:this={output} class:show={inpText}></div>
 </div>
-
-<script context="module">
-
-</script>
 
 <script>
   import { theme } from '../stores.js';
@@ -26,9 +22,7 @@
   let config = {
     text: inpText,
     width: inpSize,
-    height: inpSize,
-    colorDark: '#333333',
-    colorLight: '#ffffff'
+    height: inpSize
   }
 
   function init() {
@@ -55,19 +49,25 @@
   }
   input {
     display: block;
+    box-sizing: border-box;
     width: 100%;
     font-size: inherit;
     font-family: inherit;
     padding: .5rem;
     border: none;
-    background: #f0f0f0;
+    background: #eee;
   }
   .output {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     margin: 1rem auto;
     padding: 1rem;
+    width: fit-content;
+    background: #fff;
+  }
+  .output.show {
+    display: flex;
   }
   .dark input {
     background: #333;
