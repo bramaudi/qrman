@@ -1,5 +1,5 @@
 <script>
-	import { theme } from '../stores.js'
+	import { theme } from '../stores.js';
 	export let segment;
 	
 	function toggleTheme () {
@@ -8,6 +8,15 @@
 		ls.setItem('theme', $theme)
 	}
 </script>
+
+<nav class:dark={$theme === 'dark'}>
+	<ul>
+		<li><a rel="prefetch" aria-current="{segment === undefined ? 'page' : undefined}" href=".">Scan</a></li>
+		<li><a rel="prefetch" aria-current="{segment === 'generate' ? 'page' : undefined}" href="generate">Generate</a></li>
+		<li><a rel="prefetch" aria-current="{segment === 'about' ? 'page' : undefined}" href="about">About</a></li>
+    <li><span class="toggle" on:click={toggleTheme} type="button">{$theme}</span></li>
+	</ul>
+</nav>
 
 <style>
 	nav {
@@ -70,17 +79,4 @@
 	.dark [aria-current]::after {
 		background: #aaaaaa
   }
-
-  @media screen and (min-width: 784px) {
-
-  }
 </style>
-
-<nav class:dark={$theme === 'dark'}>
-	<ul>
-		<li><a rel="prefetch" aria-current="{segment === undefined ? 'page' : undefined}" href=".">Scan</a></li>
-		<li><a rel="prefetch" aria-current="{segment === 'generate' ? 'page' : undefined}" href="generate">Generate</a></li>
-		<li><a rel="prefetch" aria-current="{segment === 'about' ? 'page' : undefined}" href="about">About</a></li>
-    <li><span class="toggle" on:click={toggleTheme} type="button">{$theme}</span></li>
-	</ul>
-</nav>

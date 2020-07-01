@@ -1,7 +1,19 @@
+<Preloading />
+{#if segment === 'webcam'}
+	<slot></slot>
+{:else}
+	<main class:dark={$theme === 'dark'}>
+		<slot></slot>
+	</main>
+
+	<Nav {segment}/>
+{/if}
+
 <script>
 	import { onMount } from 'svelte'
 	import { theme } from '../stores.js'
 	import Nav from '../components/nav.svelte';
+	import Preloading from '../components/preloading.svelte';
 
 	onMount(() => {
 		const ls = window.localStorage
@@ -14,16 +26,6 @@
 
 	export let segment;
 </script>
-
-{#if segment === 'webcam'}
-	<slot></slot>
-{:else}
-	<main class:dark={$theme === 'dark'}>
-		<slot></slot>
-	</main>
-
-	<Nav {segment}/>
-{/if}
 
 <style>
 	main {
