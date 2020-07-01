@@ -1,27 +1,27 @@
 <sapper:head>
   <title>Generate | QRMan</title>
+  <script defer src="/js/qrcode.min.js"></script>
 </sapper:head>
-
-<sapper:footer>
-  <script src="/js/qrcode.min.js"></script>
-</sapper:footer>
 
 <div class:dark={$theme === 'dark'}>
   <label for="text">Text:</label>
   <input type="text" id="text" bind:value={inpText} on:input={generate}>
 
   <label for="size">Size:</label>
-  <input type="range" id="size" bind:value={inpSize} on:input={resize} min="30" max="500">
+  <input type="range" id="size" bind:value={inpSize} on:input={resize} min="30" max="300">
 
   <div class="output" bind:this={output}></div>
 </div>
 
+<script context="module">
+
+</script>
+
 <script>
-  import { onMount } from 'svelte';
   import { theme } from '../stores.js';
   let qrcode
   let output
-  let inpText = 'QRMan'
+  let inpText
   let inpSize = '192'
   let config = {
     text: inpText,
@@ -31,23 +31,20 @@
     colorLight: '#ffffff'
   }
 
-  onMount(() => {
-    init(config)
-  })
-
-  function init(config) {
+  function init() {
     output.innerHTML = ''
     qrcode = new QRCode(output, config)
   }
 
   function generate() {
-    qrcode.makeCode(inpText)
+    init()
+    qrcode.makeCode(inpText)  
   }
 
   function resize() {
     config.width = inpSize
     config.height = inpSize
-    init(config)
+    inpText && generate()
   }
 </script>
 
@@ -57,6 +54,7 @@
     font-weight: bold;
   }
   input {
+    display: block;
     width: 100%;
     font-size: inherit;
     font-family: inherit;
