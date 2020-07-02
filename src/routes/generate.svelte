@@ -55,7 +55,7 @@
     font-family: inherit;
     padding: .5rem;
     border: none;
-    background: #eee;
+    background: #ddd;
   }
   .output {
     display: none;
