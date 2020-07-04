@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "id.bramaudi.qrman",
+                   "sha256_cert_fingerprints": ["E6:31:30:D3:24:14:FB:9C:55:FC:78:72:4F:FF:0E:7E:FF:9D:41:E7:6E:17:4A:25:93:84:9B:0E:8F:77:0F:97"] }
+    }]
