@@ -1,0 +1,25 @@
+{
+  "packageId": "id.my.bram.qrman",
+  "host": "qrman.bram.my.id",
+  "name": "QRMan",
+  "launcherName": "QRMan",
+  "themeColor": "#333333",
+  "navigationColor": "#000000",
+  "backgroundColor": "#FFFFFF",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://qrman.bram.my.id/images/android-chrome-512x512.png",
+  "maskableIconUrl": "https://qrman.bram.my.id/images/maskable.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "alias": "android",
+    "path": "./android.keystore"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://qrman.bram.my.id/manifest.json",
+  "fallbackType": "customtabs",
+  "appVersion": "1"
+}

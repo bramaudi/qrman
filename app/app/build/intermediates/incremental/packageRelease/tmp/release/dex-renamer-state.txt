@@ -1,0 +1,4 @@
+#Sun Jul 05 04:11:40 WIB 2020
+base.0=/home/mumet/Coding/qrman/app/app/build/intermediates/transforms/r8/release/0/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
