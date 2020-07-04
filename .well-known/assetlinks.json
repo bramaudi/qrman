@@ -1,5 +1,5 @@
 [{
       "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "id.bramaudi.qrman",
-                   "sha256_cert_fingerprints": ["E6:31:30:D3:24:14:FB:9C:55:FC:78:72:4F:FF:0E:7E:FF:9D:41:E7:6E:17:4A:25:93:84:9B:0E:8F:77:0F:97"] }
+      "target" : { "namespace": "android_app", "package_name": "id.my.bram.qrman",
+                   "sha256_cert_fingerprints": ["44:3D:87:6A:A9:53:B0:1A:C9:EB:19:5C:6C:0C:08:5A:A5:41:A2:66:39:9A:1F:6E:E2:9C:17:1F:14:4F:95:F8"] }
     }]
